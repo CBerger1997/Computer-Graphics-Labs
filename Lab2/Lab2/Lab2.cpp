@@ -4,24 +4,48 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
+#include <error.h>
 #include <file.h>
 #include <shader.h>
 
 GLfloat vertices[] =
 {
-	//pos				
-	0.f,  0.5f,
-	-0.5f, -0.5f,
-	0.5f,  -0.5f
+	//pos			//col
+	0.0f,  0.5f,	1.0f, 0.0f, 0.0f,
+   -0.5f, -0.5f,	0.0f, 1.0f, 0.0f,
+	0.5f, -0.5f,	0.0f, 0.0f, 1.0f,
 };
-
-
 
 #define NUM_BUFFERS 1
 #define NUM_VAOS 1
 GLuint Buffers[NUM_BUFFERS];
 GLuint VAOs[NUM_VAOS];
 
+float x_offset = 0.0f;
+float y_offset = 0.0f;
+
+void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+
+	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT) {
+		x_offset -= 0.01f;
+	}
+	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT) {
+		x_offset += 0.01f;
+	}
+	if (key == GLFW_KEY_UP && action == GLFW_REPEAT) {
+		y_offset += 0.01f;
+	}
+	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT) {
+		y_offset -= 0.01f;
+	}
+}
+
+void SizeCallback(GLFWwindow* window, int w, int h) {
+	glViewport(0, 0, w, h);
+}
 
 int main()
 {
@@ -29,29 +53,38 @@ int main()
 
 	GLFWwindow* window = glfwCreateWindow(640, 480, "A Triangle", NULL, NULL);
 	glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window, KeyCallback);
+	glfwSetWindowSizeCallback(window, SizeCallback);
 
 	gl3wInit();
 
 	GLuint program = 0;
 
-	program = CompileShader ("triangle.vert", "triangle.frag");
+	program = CompileShader("triangle.vert", "triangle.frag");
+
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(DebugCallback, 0);
 
 	glCreateBuffers(NUM_BUFFERS, Buffers);
 	glNamedBufferStorage(Buffers[0], sizeof(vertices), vertices, 0);
 	glGenVertexArrays(NUM_VAOS, VAOs);
 	glBindVertexArray(VAOs[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[0]);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, (2 * sizeof(float)), (void*)0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, (5 * sizeof(float)), (void*)0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, (5 * sizeof(float)), (void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		static const GLfloat bgd[] = { 1.f, 1.f, 1.f, 1.f };
 		glClearBufferfv(GL_COLOR, 0, bgd);
 
-		glUseProgram (program);
-		glBindVertexArray (VAOs[0]);
-		glDrawArrays (GL_TRIANGLES, 0, 3);
+		glUseProgram(program);
+		glUniform1f(glGetUniformLocation(program, "x_offset"), x_offset);
+		glUniform1f(glGetUniformLocation(program, "y_offset"), y_offset);
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

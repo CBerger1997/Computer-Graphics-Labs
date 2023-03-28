@@ -1,3 +1,3 @@
 ﻿  Lab2.cpp
-C:\Users\callu\OneDrive\Desktop\COMP3011\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-  Lab2.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Lab2\x64\Debug\Lab2.exe
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+  Lab2.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Lab2\x64\Debug\Lab2.exe
