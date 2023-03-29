@@ -58,9 +58,7 @@ int main()
 
 	gl3wInit();
 
-	GLuint program = 0;
-
-	program = CompileShader("triangle.vert", "triangle.frag");
+	GLuint program = CompileShader("triangle.vert", "triangle.frag");
 
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(DebugCallback, 0);
