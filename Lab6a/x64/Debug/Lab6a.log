@@ -1,0 +1,2 @@
+﻿  gl3w.c
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\GL\gl3w.c(29,10): fatal  error C1083: Cannot open include file: 'GL/gl3w.h': No such file or directory

@@ -1,0 +1,19 @@
+﻿  Lab6b.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\bitmap.h(48): warning C4715: 'loadbitmap': not all control paths return a value
+  Lab6b.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Lab6b\x64\Debug\Lab6b.exe
