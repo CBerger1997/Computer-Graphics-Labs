@@ -13,9 +13,12 @@ point evaluate (float t, std::list<point> P) {
 
 		std::list<point>::iterator p1 = Q.begin ();
 
-		for (std::list<point>::iterator p2 = Q.begin (); p2 != Q.end (); ++p2) {
-			point p = ((1 - t) * (*p1)) + (t * (*p2));
+		for (std::list<point>::iterator p2 = Q.begin (); p2 != Q.end (); p2++) {
+			point p = ((1 - t) * (*p1)) + (t * (*p2++));
 			R.push_back (p);
+
+			std::cout << p1->x << std::endl;
+			std::cout << p2->x << std::endl;
 		}
 
 		Q.clear ();
