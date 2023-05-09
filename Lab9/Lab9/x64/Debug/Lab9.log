@@ -1,5 +1,4 @@
 ﻿  Lab9.cpp
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\casteljau.h(35,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\casteljau.h(46,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Lab9.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Lab9\x64\Debug\Lab9.exe
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\casteljau.h(58,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Lab9.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Lab9\x64\Debug\Lab9.exe

@@ -23,17 +23,20 @@ GLuint VAOs[NUM_VAOS];
 #define HEIGHT 768
 
 
-void SizeCallback (GLFWwindow* window, int w, int h) {
+void SizeCallback (GLFWwindow* window, int w, int h)
+{
 	glViewport (0, 0, w, h);
 }
 
 
-void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods) {
+void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods)
+{
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose (window, true);
 }
 
-int main (int argc, char** argv) {
+int main (int argc, char** argv)
+{
 	glfwInit ();
 
 	GLFWwindow* window = glfwCreateWindow (WIDTH, HEIGHT, "Curves", NULL, NULL);
@@ -49,19 +52,24 @@ int main (int argc, char** argv) {
 	GLuint program = CompileShader ("mvp.vert", "col.frag");
 
 	std::vector<point> ctrl_points;
-	ctrl_points.push_back (point (-5.0f, -1.0f, 0.0f));
-	ctrl_points.push_back (point (5.0f, -1.0f, 0.0f));
+	ctrl_points.push_back (point (-5.0f, 4.0f, 0.0f));
+	ctrl_points.push_back (point (-1.0f, 0.0f, 0.0f));
+	ctrl_points.push_back (point (-3.5f, -2.0f, 0.0f));
+	ctrl_points.push_back (point (-4.0f, -2.0f, 0.0f));
+	ctrl_points.push_back (point (-4.0f, -1.5f, 0.0f));
+	ctrl_points.push_back (point (-4.0f, 0.0f, 0.0f));
+	ctrl_points.push_back (point (5.0f, 4.0f, 0.0f));
 
-	int num_evaluations = 128;
+	int num_evaluations = 30;
 	std::vector<point> curve = EvaluateBezierCurve (ctrl_points, num_evaluations);
 
 	int num_curve_verts = 0;
 	int num_curve_floats = 0;
-	float* curve_vertices = MakeFloatsFromVector(curve, num_curve_verts, num_curve_floats, 0.0f, 0.0f, 0.0f);
+	float* curve_vertices = MakeFloatsFromVector (curve, num_curve_verts, num_curve_floats, 0.0f, 0.0f, 0.0f);
 
 	int num_ctrl_verts = 0;
 	int num_ctrl_floats = 0;
-	float* ctrl_vertices = MakeFloatsFromVector (ctrl_points, num_curve_verts, num_curve_floats, 0.0f, 0.0f, 0.0f);
+	float* ctrl_vertices = MakeFloatsFromVector (ctrl_points, num_ctrl_verts, num_ctrl_floats, 1.0f, 0.0f, 0.0f);
 
 	glCreateBuffers (NUM_BUFFERS, Buffers);
 	glGenVertexArrays (NUM_VAOS, VAOs);
@@ -89,7 +97,8 @@ int main (int argc, char** argv) {
 
 	glUseProgram (program);
 
-	while (!glfwWindowShouldClose (window)) {
+	while (!glfwWindowShouldClose (window))
+	{
 		static const GLfloat bgd[] = { 1.f, 1.f, 1.f, 1.f };
 		glClearBufferfv (GL_COLOR, 0, bgd);
 		glClear (GL_DEPTH_BUFFER_BIT);
@@ -109,7 +118,7 @@ int main (int argc, char** argv) {
 		glDrawArrays (GL_LINE_STRIP, 0, num_curve_verts);
 
 		glBindVertexArray (VAOs[1]);
-		glDrawArrays (GL_LINE_STRIP, 0, num_ctrl_verts);
+		glDrawArrays (GL_POINTS, 0, num_ctrl_verts);
 
 		glfwSwapBuffers (window);
 		glfwPollEvents ();
