@@ -1,0 +1,6 @@
+﻿  Lab9.cpp
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\casteljau.h(32,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\casteljau.h(43,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Lab9.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Lab9\x64\Debug\Lab9.exe

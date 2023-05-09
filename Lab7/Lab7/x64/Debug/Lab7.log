@@ -1,18 +1,18 @@
 ﻿  Lab7.cpp
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-  Lab7.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Lab7\x64\Debug\Lab7.exe
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+  Lab7.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Lab7\x64\Debug\Lab7.exe

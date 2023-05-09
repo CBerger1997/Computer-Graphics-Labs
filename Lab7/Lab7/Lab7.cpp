@@ -17,6 +17,7 @@
 
 //light direction variable here
 glm::vec3 lightDirection = glm::vec3 (0.1f, -0.81f, -0.61f);
+glm::vec3 lightPos = glm::vec3 (2.0f, 6.0f, 7.0f);
 
 SCamera Camera;
 
@@ -122,6 +123,7 @@ void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	{
 		lightDirection = Camera.Front;
+		lightPos = Camera.Position;
 	}
 
 	float x_offset = 0.0f;
@@ -228,6 +230,7 @@ int main (int argc, char** argv)
 		glUniform3f (glGetUniformLocation (program, "lightDirection"), lightDirection.x, lightDirection.y, lightDirection.z);
 		glUniform3f (glGetUniformLocation (program, "lightColour"), 0.0f, 0.0f, 1.0f);
 		glUniform3f (glGetUniformLocation (program, "camPos"), Camera.Position.x, Camera.Position.y, Camera.Position.z);
+		glUniform3f (glGetUniformLocation (program, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 		glm::mat4 view = glm::mat4 (1.f);
 		view = glm::lookAt (Camera.Position, Camera.Position + Camera.Front, Camera.Up);
