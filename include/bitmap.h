@@ -70,7 +70,7 @@ GLuint savebitmap (const char* filename,
 
 	fclose (bitmapFile);
 
-	printf ("savebitmap - saved %s w=%d h=%d bits=%d\n", filename, infoHeader->biWidth, infoHeader->biHeight, infoHeader->biBitCount);
+	//printf ("savebitmap - saved %s w=%d h=%d bits=%d\n", filename, infoHeader->biWidth, infoHeader->biHeight, infoHeader->biBitCount);
 }
 
 #endif //BITMAP_H

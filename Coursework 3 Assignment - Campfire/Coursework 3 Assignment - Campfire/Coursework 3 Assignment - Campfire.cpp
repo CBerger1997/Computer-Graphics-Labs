@@ -6,76 +6,24 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 #include "camera.h"
 #include "file.h"
 #include "error.h"
 #include "shader.h"
 #include "shadow.h"
+#include "object_loader.h"
 
-//light direction variable here
 glm::vec3 lightDirection = glm::vec3 (0.1f, -0.81f, -0.61f);
 glm::vec3 lightPos = glm::vec3 (2.0f, 6.0f, 7.0f);
 
 SCamera Camera;
 
-
-float vertices[] =
-{
-	//back face
-	//pos					//col				//normal
-	-0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.5f,  0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.5f,  0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	-0.5f,  0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	-0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-
-	//front face
-	-0.5f, -0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.5f,  0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.5f,  0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	-0.5f,  0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	-0.5f, -0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-
-	//left face
-	-0.5f,  0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.5f,  0.5f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.5f,  0.5f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-
-	//right face
-	0.5f,  0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.5f,  0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.5f, -0.5f, -1.5f, 	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.5f, -0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.5f,  0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-
-	//bottom face
-	-0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.5f, -0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.5f, -0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	-0.5f, -0.5f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	-0.5f, -0.5f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-
-	//top face
-	-0.5f,  0.5f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	-0.5f,  0.5f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	-0.5f,  0.5f, -1.5f, 	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-};
-
-
-
-#define NUM_BUFFERS 1
-#define NUM_VAOS 1
+#define NUM_BUFFERS 2
+#define NUM_VAOS 2
 GLuint Buffers[NUM_BUFFERS];
 GLuint VAOs[NUM_VAOS];
 
@@ -84,34 +32,80 @@ GLuint VAOs[NUM_VAOS];
 #define SH_MAP_WIDTH 2048
 #define SH_MAP_HEIGHT 2048
 
+float vertices[] =
+{
+	//back face
+	//pos					//col				//normal
+	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	 0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	 0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	 0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	-0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+
+	//front face
+	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	 0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	 0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	 0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+
+	//left face
+	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	-0.25f,  0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	-0.25f, -0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	-0.25f, -0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+
+	//right face
+	0.25f,  0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	0.25f, -0.25f, -1.5f, 	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	0.25f,  0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+
+	//bottom face
+	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	 0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	 0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	 0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	-0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+
+	//top face
+	-0.25f,  0.25f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+	 0.25f,  0.25f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+	 0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+	 0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+	-0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+	-0.25f,  0.25f, -1.5f, 	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
+};
+
 void drawFloorAndCubes (unsigned int shaderProgram)
 {
 	glBindVertexArray (VAOs[0]);
 
 	//floor
-	glm::mat4 model = glm::mat4 (1.f);
-	model = glm::translate (model, glm::vec3 (0, -3, 0));
-	model = glm::scale (model, glm::vec3 (100, 0.1, 100));
-	glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (model));
+	glm::mat4 floorModel = glm::mat4 (1.f);
+	floorModel = glm::translate (floorModel, glm::vec3 (0, -1, 0));
+	floorModel = glm::scale (floorModel, glm::vec3 (100, 0.1, 100));
+	glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (floorModel));
 	glDrawArrays (GL_TRIANGLES, 0, 36);
 
-	//glm::mat4 model2 = glm::mat4 (1.f);
-	//model2 = glm::translate (model2, glm::vec3 (0, 0, 0));
-	//glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (model2));
-	//glDrawArrays (GL_TRIANGLES, 0, 36);
-
 	//campfire
-	for (int i = -3; i < 3; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		glm::mat4 model = glm::mat4 (1.f);
-		model = glm::translate (model, glm::vec3 (float (i * 2), float (0 * 2), float (0 * 2)));
-		glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (model));
+		glm::mat4 campfireModel = glm::mat4 (1.f);
+		campfireModel = glm::rotate (campfireModel, (float)glm::radians (60.0f * i), glm::vec3 (0.0f, 1.0f, 0.0f));
+		campfireModel = glm::translate (campfireModel, glm::vec3 (0.0f, 0.0f, 1.0f));
+		campfireModel = glm::rotate (campfireModel, (float)glm::radians (45.0f), glm::vec3 (1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (campfireModel));
 		glDrawArrays (GL_TRIANGLES, 0, 36);
 	}
-
 }
-
-
 
 void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -244,12 +238,22 @@ int main (int argc, char** argv)
 	cam_dist = 5.f;
 	MoveAndOrientCamera (Camera, glm::vec3 (0, 0, 0), cam_dist, 0.f, 0.f);
 
+	// Read our .obj file
+	std::vector< glm::vec3 > verts;
+	std::vector< glm::vec2 > uvs;
+	std::vector< glm::vec3 > norms; // Won't be used at the moment.
+
+	GameObject tree;
+
+	tree.LoadObject ("tree_obj.obj", verts, uvs, norms);
 
 	glCreateBuffers (NUM_BUFFERS, Buffers);
 	glNamedBufferStorage (Buffers[0], sizeof (vertices), vertices, 0);
+	glNamedBufferStorage (Buffers[1], verts.size () * sizeof (glm::vec3), &verts[0], 0);
 	glGenVertexArrays (NUM_VAOS, VAOs);
 	glBindVertexArray (VAOs[0]);
 	glBindBuffer (GL_ARRAY_BUFFER, Buffers[0]);
+	glBindBuffer (GL_ARRAY_BUFFER, Buffers[1]);
 	glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, (9 * sizeof (float)), (void*)0);
 	glEnableVertexAttribArray (0);
 	glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, (9 * sizeof (float)), (void*)(3 * sizeof (float)));
@@ -258,7 +262,6 @@ int main (int argc, char** argv)
 	glEnableVertexAttribArray (2);
 
 	glEnable (GL_DEPTH_TEST);
-
 
 	while (!glfwWindowShouldClose (window))
 	{
@@ -270,9 +273,11 @@ int main (int argc, char** argv)
 
 		generateDepthMap (shadow_program, shadow, projectedLightSpaceMatrix);
 
-		saveShadowMapToBitmap (shadow.Texture, SH_MAP_WIDTH, SH_MAP_HEIGHT);
+		//saveShadowMapToBitmap (shadow.Texture, SH_MAP_WIDTH, SH_MAP_HEIGHT);
 
 		renderWithShadow (program, shadow, projectedLightSpaceMatrix);
+
+		tree.Draw ();
 
 		glfwSwapBuffers (window);
 		glfwPollEvents ();
