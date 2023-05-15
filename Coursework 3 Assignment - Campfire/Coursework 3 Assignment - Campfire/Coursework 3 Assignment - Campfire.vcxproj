@@ -133,18 +133,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\GL\gl3w.c" />
-    <ClCompile Include="Coursework 3 Assignment - Campfire.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Grass.cpp" />
+    <ClCompile Include="GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="particle.frag" />
-    <None Include="particle.vert" />
     <None Include="phong.frag" />
     <None Include="phong.vert" />
     <None Include="shadow.frag" />
     <None Include="shadow.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="object_loader.h" />
+    <ClInclude Include="Grass.h" />
+    <ClInclude Include="GameObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

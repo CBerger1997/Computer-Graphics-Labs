@@ -15,35 +15,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Coursework 3 Assignment - Campfire.cpp">
+    <ClCompile Include="Grass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\GL\gl3w.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="phong.frag">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="phong.vert">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="shadow.frag">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="shadow.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="particle.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="particle.vert">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="object_loader.h">
+    <ClInclude Include="GameObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

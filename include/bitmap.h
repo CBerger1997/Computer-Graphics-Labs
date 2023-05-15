@@ -5,9 +5,6 @@
 #include <windows.h>
 #include <wingdi.h>
 
-
-
-
 GLuint loadbitmap (const char* filename, unsigned char*& pixelBuffer, BITMAPINFOHEADER* infoHeader, BITMAPFILEHEADER* fileHeader) {
 	FILE* bitmapFile;
 
