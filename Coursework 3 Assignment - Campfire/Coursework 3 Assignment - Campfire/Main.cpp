@@ -93,13 +93,7 @@ float vertices[] =
 
 void DrawTreeObjects (unsigned int shaderProgram)
 {
-	//glm::mat4 treeModel = glm::mat4 (1.f);
-	//treeModel = glm::translate (treeModel, trees[0].position);
-	//treeModel = glm::rotate (treeModel, (float)glm::radians (trees[0].rotation), glm::vec3 (0.0f, 1.0f, 0.0f));
-	//glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (treeModel));
-	//trees[0].Draw ();
-
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < trees.size(); i++)
 	{
 		glm::mat4 treeModel = glm::mat4 (1.f);
 		treeModel = glm::translate (treeModel, trees[i].position);
