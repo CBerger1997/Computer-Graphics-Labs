@@ -210,8 +210,10 @@ void GameObject::LoadObject (const char* path, std::vector<glm::vec3>& verts, st
 	}
 }
 
-void GameObject::Draw ()
+void GameObject::Draw (GLuint shader)
 {
+	glUniformMatrix4fv (glGetUniformLocation (shader, "model"), 1, GL_FALSE, glm::value_ptr (model));
+
 	glBindVertexArray (VAO);
 	glDrawArrays (GL_TRIANGLES, 0, numVertices);
 	glBindVertexArray (0);

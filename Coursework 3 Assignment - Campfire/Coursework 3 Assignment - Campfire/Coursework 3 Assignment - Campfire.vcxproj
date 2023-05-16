@@ -136,6 +136,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="phong.frag" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Grass.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

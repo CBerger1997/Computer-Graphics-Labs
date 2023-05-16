@@ -1,23 +1,23 @@
 ﻿  Main.cpp
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(43,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(44,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(43,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(44,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\bitmap.h(46): warning C4715: 'loadbitmap': not all control paths return a value
-C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\bitmap.h(71): warning C4715: 'savebitmap': not all control paths return a value
-  Coursework 3 Assignment - Campfire.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire\x64\Debug\Coursework 3 Assignment - Campfire.exe
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\bitmap.h(49): warning C4715: 'loadbitmap': not all control paths return a value
+C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\bitmap.h(74): warning C4715: 'savebitmap': not all control paths return a value
+  Coursework 3 Assignment - Campfire.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire\x64\Debug\Coursework 3 Assignment - Campfire.exe

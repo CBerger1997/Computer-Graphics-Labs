@@ -1,5 +1,3 @@
-#include <GL/gl3w.h>
-#include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,31 +9,11 @@
 #include <sstream>
 
 #include "file.h"
-#include "shader.h"
-#include "shadow.h"
-#include "camera.h"
-#include "error.h"
-#include "GameObject.h"
 
-#define NUM_BUFFERS 11
-#define NUM_VAOS 11
-
-GLuint Buffers[NUM_BUFFERS];
-GLuint VAOs[NUM_VAOS];
-
-#define WIDTH 1920
-#define HEIGHT 1080
-#define SH_MAP_WIDTH 3840
-#define SH_MAP_HEIGHT 3840
+#include "Tree.h"
 
 glm::vec3 lightDirection = glm::vec3 (0.1f, -0.81f, -0.61f);
 glm::vec3 lightPos = glm::vec3 (2.0f, 6.0f, 7.0f);
-
-SCamera Camera;
-GLFWwindow* window;
-GLuint standardShader;
-GLuint shadowShader;
-ShadowStruct shadow;
 
 std::vector<GameObject> trees;
 
@@ -91,21 +69,17 @@ float vertices[] =
 	-0.25f,  0.25f, -1.5f, 	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
 };
 
-void DrawTreeObjects (unsigned int shaderProgram)
+void DrawTreeObjects (unsigned int shader)
 {
 	for (int i = 0; i < trees.size(); i++)
 	{
-		glm::mat4 treeModel = glm::mat4 (1.f);
-		treeModel = glm::translate (treeModel, trees[i].position);
-		treeModel = glm::rotate (treeModel, (float)glm::radians (trees[i].rotation), glm::vec3 (0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (treeModel));
-		trees[i].Draw ();
+		trees[i].Draw (shader);
 	}
 }
 
-void DrawObjects (unsigned int shaderProgram)
+void DrawObjects (unsigned int shader)
 {
-	DrawTreeObjects (shaderProgram);
+	DrawTreeObjects (shader);
 
 	glBindVertexArray (VAOs[0]);
 
@@ -113,7 +87,7 @@ void DrawObjects (unsigned int shaderProgram)
 	glm::mat4 floorModel = glm::mat4 (1.f);
 	floorModel = glm::translate (floorModel, glm::vec3 (0, -1, 0));
 	floorModel = glm::scale (floorModel, glm::vec3 (150, 0.1, 50));
-	glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (floorModel));
+	glUniformMatrix4fv (glGetUniformLocation (shader, "model"), 1, GL_FALSE, glm::value_ptr (floorModel));
 	glDrawArrays (GL_TRIANGLES, 0, 36);
 
 	//campfire
@@ -123,7 +97,7 @@ void DrawObjects (unsigned int shaderProgram)
 		campfireModel = glm::rotate (campfireModel, (float)glm::radians (60.0f * i), glm::vec3 (0.0f, 1.0f, 0.0f));
 		campfireModel = glm::translate (campfireModel, glm::vec3 (0.0f, 0.0f, 1.0f));
 		campfireModel = glm::rotate (campfireModel, (float)glm::radians (45.0f), glm::vec3 (1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv (glGetUniformLocation (shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr (campfireModel));
+		glUniformMatrix4fv (glGetUniformLocation (shader, "model"), 1, GL_FALSE, glm::value_ptr (campfireModel));
 		glDrawArrays (GL_TRIANGLES, 0, 36);
 	}
 
@@ -136,131 +110,20 @@ void CreateObjects ()
 	std::vector<glm::vec3> norms;
 	std::vector<glm::vec2> uv;
 
-	GameObject tree ("tree.mtl");
+	Tree tree ("tree.mtl");
 	tree.LoadObject ("tree.obj", vects, uv, norms);
 
 	for (int i = 0; i < 100; i++)
 	{
-		tree.position = glm::vec3 ((rand () % 100) - 50, -1, (rand () % 100) - 50);
-		tree.rotation = (float)(rand () % 360);
+		tree.Move (glm::vec3 ((rand () % 100) - 50, -1, (rand () % 100) - 50));
+		tree.Rotate (glm::vec3 (0.0f, 1.0f, 0.0f), (float)(rand () % 360));
 		trees.push_back (tree);
 	}
 }
 
-void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose (window, true);
-
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	{
-		lightDirection = Camera.Front;
-	}
-
-	float x_offset = 0.0f;
-	float y_offset = 0.0f;
-	bool cam_changed = false;
-
-	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
-	{
-		x_offset = 1.0f;
-		y_offset = 0.0f;
-		cam_changed = true;
-	}
-
-	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
-	{
-		x_offset = -1.0f;
-		y_offset = 0.0f;
-		cam_changed = true;
-	}
-
-	if (key == GLFW_KEY_UP && action == GLFW_REPEAT)
-	{
-		x_offset = 0.0f;
-		y_offset = -1.0f;
-		cam_changed = true;
-	}
-
-	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
-	{
-		x_offset = 0.0f;
-		y_offset = 1.0f;
-		cam_changed = true;
-	}
-
-	if (key == GLFW_KEY_R && action == GLFW_REPEAT)
-	{
-		cam_dist -= 0.5f;
-		cam_changed = true;
-	}
-
-	if (key == GLFW_KEY_F && action == GLFW_REPEAT)
-	{
-		cam_dist += 0.5f;
-		cam_changed = true;
-	}
-
-	if (cam_changed)
-	{
-		MoveAndOrientCamera (Camera, glm::vec3 (0.0f, 0.0f, 0.0f), cam_dist, x_offset, y_offset);
-	}
-}
-
-void SizeCallback (GLFWwindow* window, int w, int h)
-{
-	glViewport (0, 0, w, h);
-}
-
 //Setup and quit functions
 #pragma region SETUPQUIT
-void Init ()
-{
-	glfwInit ();
 
-	window = glfwCreateWindow (WIDTH, HEIGHT, "Campfire Scene", NULL, NULL);
-	glfwMakeContextCurrent (window);
-	glfwSetKeyCallback (window, KeyCallback);
-	glfwSetWindowSizeCallback (window, SizeCallback);
-
-	gl3wInit ();
-
-	glEnable (GL_DEBUG_OUTPUT);
-	glDebugMessageCallback (DebugCallback, 0);
-
-	shadow = setup_shadowmap (SH_MAP_WIDTH, SH_MAP_HEIGHT);
-
-	standardShader = CompileShader ("phong.vert", "phong.frag");
-	shadowShader = CompileShader ("shadow.vert", "shadow.frag");
-
-	InitCamera (Camera);
-	cam_dist = 5.f;
-	MoveAndOrientCamera (Camera, glm::vec3 (0, 0, 0), cam_dist, 0.f, 0.f);
-
-	glCreateBuffers (NUM_BUFFERS, Buffers);
-	glNamedBufferStorage (Buffers[0], sizeof (vertices), vertices, 0);
-	glGenVertexArrays (NUM_VAOS, VAOs);
-
-	glBindVertexArray (VAOs[0]);
-	glBindBuffer (GL_ARRAY_BUFFER, Buffers[0]);
-	glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, (9 * sizeof (float)), (void*)0);
-	glEnableVertexAttribArray (0);
-	glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, (9 * sizeof (float)), (void*)(3 * sizeof (float)));
-	glEnableVertexAttribArray (1);
-	glVertexAttribPointer (2, 3, GL_FLOAT, GL_FALSE, (9 * sizeof (float)), (void*)(6 * sizeof (float)));
-	glEnableVertexAttribArray (2);
-	glBindVertexArray (0);
-
-	CreateObjects ();
-
-	glEnable (GL_DEPTH_TEST);
-}
-
-void Deinit ()
-{
-	glfwDestroyWindow (window);
-	glfwTerminate ();
-}
 #pragma endregion
 
 //Functions for rendering
@@ -310,13 +173,15 @@ void RenderShadows (unsigned int renderShadowProgram, ShadowStruct shadow, glm::
 
 void Render ()
 {
-	float near_plane = 1.0f, far_plane = 100.5f;
+	float near_plane = 1.0f, far_plane = 70.5f;
 
 	glm::mat4 lightProjection = glm::ortho (-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
 	glm::mat4 lightView = glm::lookAt (lightPos, lightPos + lightDirection, glm::vec3 (0.0f, 1.0f, 0.0f));
 	glm::mat4 projectedLightSpaceMatrix = lightProjection * lightView;
 
 	RenderDepthMap (shadowShader, shadow, projectedLightSpaceMatrix);
+
+	saveShadowMapToBitmap (shadow.Texture, SH_MAP_WIDTH, SH_MAP_HEIGHT);
 
 	RenderShadows (standardShader, shadow, projectedLightSpaceMatrix);
 
@@ -336,6 +201,8 @@ void RunScene ()
 int main (int argc, char** argv)
 {
 	Init ();
+
+	CreateObjects ();
 
 	RunScene ();
 
