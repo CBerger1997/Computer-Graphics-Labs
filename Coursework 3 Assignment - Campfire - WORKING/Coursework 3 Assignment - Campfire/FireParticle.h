@@ -21,6 +21,8 @@ public:
 	bool isGreen;
 	bool isBlue;
 
+	std::vector<glm::vec3> colours;
+
 private:
 	float moveSpeed;
 	float lifetime;
@@ -29,4 +31,5 @@ private:
 	std::vector<point> curve;
 	int curveIndex;
 	glm::vec3 colour;
+
 };

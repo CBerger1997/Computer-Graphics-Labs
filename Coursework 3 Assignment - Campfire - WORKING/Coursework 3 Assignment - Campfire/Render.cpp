@@ -80,13 +80,11 @@ void Render::DrawObjects (unsigned int shaderProgram, float deltaTime)
 
 	DrawMushroomObjects (shaderProgram);
 
-	Render::campfire->Draw (shaderProgram, deltaTime);
-}
-
-void Render::DrawTextureObjects (unsigned int shaderProgram)
-{
 	Render::ground1->Draw (shaderProgram);
+
 	Render::ground2->Draw (shaderProgram);
+
+	Render::campfire->Draw (shaderProgram, deltaTime);
 }
 
 glm::vec3 Render::CalculateTreePosition ()
@@ -208,8 +206,6 @@ void Render::RenderDepthMap (glm::mat4 projectedLightSpaceMatrix, float deltaTim
 
 	DrawObjects (shadowShader, deltaTime);
 
-	DrawTextureObjects (shadowShader);
-
 	glBindFramebuffer (GL_FRAMEBUFFER, 0);
 }
 
@@ -249,8 +245,6 @@ void Render::RenderObjects (glm::mat4 projectedLightSpaceMatrix, SCamera camera,
 	glUniformMatrix4fv (glGetUniformLocation (standardShader, "projection"), 1, GL_FALSE, glm::value_ptr (projection));
 
 	DrawObjects (standardShader, deltaTime);
-
-	DrawTextureObjects (standardShader);
 
 	glUseProgram (textureShader);
 	glUniformMatrix4fv (glGetUniformLocation (textureShader, "view"), 1, GL_FALSE, glm::value_ptr (view));

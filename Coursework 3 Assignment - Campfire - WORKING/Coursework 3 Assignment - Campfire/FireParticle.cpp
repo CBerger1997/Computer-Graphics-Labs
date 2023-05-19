@@ -120,56 +120,53 @@ void FireParticle::LoadObject ()
 		0.0f, 1.0f, 0.0f,
 	};
 
-	float colours[] =
-	{
-		//back face
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
+	//back face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
-		//front face
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
+	//front face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
-		 //left face
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
-		 1.0f, 1.0f, 0.3f,
+	//left face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
-		 //right face
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
+	//right face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
-		//bottom face
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
+	//bottom face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
-		//top face
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-		1.0f, 1.0f, 0.3f,
-	};
+	//top face
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
+	colours.push_back (glm::vec3 (1.0f, 1.0f, 0.3f));
 
 	numVertices = 36;
 
@@ -198,6 +195,9 @@ void FireParticle::LoadObject ()
 	glBindVertexArray (0);
 
 	GenerateRandomValues ();
+
+	//free (vertices);
+	//free (normals);
 }
 
 void FireParticle::GenerateRandomValues ()
@@ -218,7 +218,7 @@ void FireParticle::GenerateRandomValues ()
 		(float)((rand () % 3) - 1) / float (100.0f),
 		(float)((rand () % 5) + 2) / float (10.0f),
 		(float)((rand () % 3) - 1) / float (100.0f)));
-	
+
 	for (int i = 0; i < 6; i++)
 	{
 		ctrl_points.push_back (point (
@@ -233,22 +233,12 @@ void FireParticle::GenerateRandomValues ()
 
 void FireParticle::ChangeParticleColour (float r, float g, float b)
 {
-	float colours[108];
-
-	for (int i = 0; i < 108; i += 3)
+	for (int i = 0; i < 36; i++)
 	{
-		colours[i] = r;
-		colours[i + 1] = g;
-		colours[i + 2] = b;
+		colours[i].r = r;
+		colours[i].g = g;
+		colours[i].b = b;
 	}
-	glBindVertexArray (VAO);
-	glCreateBuffers (1, &VBO[1]);
-	glNamedBufferStorage (VBO[1], sizeof (float) * numVertices * 3, &colours[0], 0);
-	glBindBuffer (GL_ARRAY_BUFFER, VBO[1]);
-	glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray (1);
-	glBindBuffer (GL_ARRAY_BUFFER, 0);
-	glBindVertexArray (0);
 }
 
 void FireParticle::UpdateParticle (float deltaTime)
@@ -265,7 +255,7 @@ void FireParticle::UpdateParticle (float deltaTime)
 			return;
 		}
 	}
-	if (curveIndex < curve.size())
+	if (curveIndex < curve.size ())
 	{
 		Rotate (glm::vec3 (0.0f, 1.0f, 0.0f), 10.0f);
 		Move (glm::vec3 (curve[curveIndex].x, curve[curveIndex].y, curve[curveIndex].z) * moveSpeed);

@@ -16,6 +16,8 @@ uniform vec3 lightPos;
 uniform vec3 camPos;
 uniform float ambient;
 uniform bool isDirectionalLight;
+uniform bool isNewParticleColour;
+uniform vec3 newParticleColour;
 
 float shadowOnFragment(vec4 FragPosProjectedLightSpace)
 {
@@ -101,6 +103,12 @@ void main()
 		phong = CalculatePositionIllumination();
 	}
 
-
-	fColour = vec4(phong * col * lightColour, 1.0f);
+	if(isNewParticleColour)
+	{
+		fColour = vec4(phong * newParticleColour * lightColour, 1.0f);
+	} 
+	else
+	{
+		fColour = vec4(phong * col * lightColour, 1.0f);
+	}
 }

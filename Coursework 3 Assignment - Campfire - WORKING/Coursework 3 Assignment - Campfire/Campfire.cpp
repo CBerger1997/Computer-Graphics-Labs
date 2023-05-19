@@ -89,7 +89,12 @@ void Campfire::Draw (GLuint shader, float deltaTime)
 
 		if (particles[i].isActive)
 		{
+			glUniform3f (glGetUniformLocation (shader, "newParticleColour"), particles[i].colours[0].r, particles[i].colours[0].g, particles[i].colours[0].b);
+			glUniform1i (glGetUniformLocation (shader, "isNewParticleColour"), true);
+
 			particles[i].Draw (shader);
+
+			glUniform1i (glGetUniformLocation (shader, "isNewParticleColour"), false);
 		}
 	}
 }

@@ -36,7 +36,6 @@ public:
 	void RenderDepthMap (glm::mat4, float);
 	void RenderObjects (glm::mat4, SCamera, float);
 	void RenderScene (GLFWwindow*, SCamera, float);
-	void DrawTextureObjects (unsigned int);
 
 	static std::vector<Tree> trees;
 	static Campfire* campfire;
