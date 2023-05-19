@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\GL\gl3w.c" />
+    <ClCompile Include="Campfire.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -145,6 +146,7 @@
     <None Include="shadow.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Campfire.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Tree.h" />

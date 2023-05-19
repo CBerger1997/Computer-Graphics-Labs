@@ -70,14 +70,14 @@ float CalculatePositionIllumination()
 	vec3 Nnor = normalize(nor);
 	vec3 Nto_light = normalize(lightPos - FragPosWorldSpace);
 	
-	float diffuse = dot(Nnor, Nto_light);
+	float diffuse = max(dot(Nnor, Nto_light),0);
 
 	vec3 Nfrom_light = -Nto_light;
 	vec3 NrefLight = reflect(Nfrom_light, Nnor);
 	vec3 camDirection = camPos - FragPosWorldSpace;
 	vec3 NcamDirection = normalize(camDirection);
 	
-	float specular = pow(dot(NcamDirection, NrefLight), 128);
+	float specular = pow(max(dot(NcamDirection, NrefLight), 0), 128);
 
 	float d = length(lightPos - FragPosWorldSpace);
 	float attenuation = 1 / (1.5f + (0.05f * d) + (0.02f * pow(d, 2)));

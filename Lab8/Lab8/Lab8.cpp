@@ -108,7 +108,10 @@ void drawFloorAndCubes (unsigned int shaderProgram) {
 
 }
 
-
+void CursorCallback (GLFWwindow* window, double xpos, double ypos)
+{
+	OrientCamera (Camera, Camera.cam_dist, xpos, ypos);
+}
 
 void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -147,17 +150,17 @@ void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 
 	if (key == GLFW_KEY_R && action == GLFW_REPEAT) {
-		cam_dist -= 0.1f;
+		Camera.cam_dist -= 0.1f;
 		cam_changed = true;
 	}
 
 	if (key == GLFW_KEY_F && action == GLFW_REPEAT) {
-		cam_dist += 0.1f;
+		Camera.cam_dist += 0.1f;
 		cam_changed = true;
 	}
 
 	if (cam_changed) {
-		MoveAndOrientCamera (Camera, glm::vec3 (0.0f, 0.0f, 0.0f), cam_dist, x_offset, y_offset);
+		//MoveAndOrientCamera (Camera, Camera.cam_dist, x_offset, y_offset);
 	}
 }
 
@@ -212,6 +215,7 @@ int main (int argc, char** argv) {
 	GLFWwindow* window = glfwCreateWindow (WIDTH, HEIGHT, "Lighting", NULL, NULL);
 	glfwMakeContextCurrent (window);
 	glfwSetKeyCallback (window, KeyCallback);
+	glfwSetCursorPosCallback (window, CursorCallback);
 	glfwSetWindowSizeCallback (window, SizeCallback);
 
 	gl3wInit ();
@@ -225,9 +229,8 @@ int main (int argc, char** argv) {
 	GLuint shadow_program = CompileShader ("shadow.vert", "shadow.frag");
 
 	InitCamera (Camera);
-	cam_dist = 5.f;
-	MoveAndOrientCamera (Camera, glm::vec3 (0, 0, 0), cam_dist, 0.f, 0.f);
-
+	Camera.cam_dist = 5.f;
+	//MoveCamera (Camera, Camera.cam_dist, 0.f, 0.f);
 
 	glCreateBuffers (NUM_BUFFERS, Buffers);
 	glNamedBufferStorage (Buffers[0], sizeof (vertices), vertices, 0);

@@ -5,10 +5,7 @@
 #include <windows.h>
 #include <wingdi.h>
 
-
-
-
-GLuint loadbitmap (const char* filename, unsigned char*& pixelBuffer, BITMAPINFOHEADER* infoHeader, BITMAPFILEHEADER* fileHeader) {
+inline GLuint loadbitmap (const char* filename, unsigned char*& pixelBuffer, BITMAPINFOHEADER* infoHeader, BITMAPFILEHEADER* fileHeader) {
 	FILE* bitmapFile;
 
 	errno_t err = fopen_s (&bitmapFile, filename, "rb");
@@ -48,7 +45,7 @@ GLuint loadbitmap (const char* filename, unsigned char*& pixelBuffer, BITMAPINFO
 	printf ("loadbitmap - loaded %s w=%d h=%d bits=%d\n", filename, infoHeader->biWidth, infoHeader->biHeight, infoHeader->biBitCount);
 }
 
-GLuint savebitmap (const char* filename,
+inline GLuint savebitmap (const char* filename,
 	unsigned char* pixelBuffer,
 	BITMAPINFOHEADER* infoHeader, BITMAPFILEHEADER* fileHeader) {
 	FILE* bitmapFile;

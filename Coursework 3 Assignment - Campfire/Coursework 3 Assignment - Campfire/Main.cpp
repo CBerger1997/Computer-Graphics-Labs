@@ -1,3 +1,5 @@
+#include <GL/gl3w.h>
+#include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -8,66 +10,89 @@
 #include <fstream>
 #include <sstream>
 
+#include "camera.h"
 #include "file.h"
-
+#include "error.h"
+#include "shader.h"
+#include "shadow.h"
 #include "Tree.h"
+
+#define WIDTH 1024
+#define HEIGHT 768
+#define SH_MAP_WIDTH 2048
+#define SH_MAP_HEIGHT 2048
 
 glm::vec3 lightDirection = glm::vec3 (0.1f, -0.81f, -0.61f);
 glm::vec3 lightPos = glm::vec3 (2.0f, 6.0f, 7.0f);
 
 std::vector<GameObject> trees;
 
-float vertices[] =
+SCamera camera;
+GLFWwindow* window;
+ShadowStruct shadow;
+
+GLuint standardShader;
+GLuint shadowShader;
+
+void KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	//back face
-	//pos					//col				//normal
-	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	 0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	-0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
-	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, 0.0f, -1.0f,
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose (window, true);
 
-	//front face
-	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	 0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
-	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 1.0f,
+	float x_offset = 0.0f;
+	float y_offset = 0.0f;
+	bool cam_changed = false;
 
-	//left face
-	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.25f,  0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.25f, -0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.25f, -0.25f, -1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.25f, -0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
-	-0.25f,  0.25f,  1.5f,  	1.0f, 1.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+	if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
+	{
+		x_offset = 1.0f;
+		y_offset = 0.0f;
+		cam_changed = true;
+	}
 
-	//right face
-	0.25f,  0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.25f,  0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.25f, -0.25f, -1.5f, 	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
-	0.25f,  0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+	if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
+	{
+		x_offset = -1.0f;
+		y_offset = 0.0f;
+		cam_changed = true;
+	}
 
-	//bottom face
-	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	 0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	-0.25f, -0.25f,  1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-	-0.25f, -0.25f, -1.5f,  	1.f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+	if (key == GLFW_KEY_UP && action == GLFW_REPEAT)
+	{
+		x_offset = 0.0f;
+		y_offset = -1.0f;
+		cam_changed = true;
+	}
 
-	//top face
-	-0.25f,  0.25f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.25f,  0.25f, -1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	 0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	-0.25f,  0.25f,  1.5f,  	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-	-0.25f,  0.25f, -1.5f, 	1.0f, 1.f, 1.0f,	0.0f, 1.0f, 0.0f,
-};
+	if (key == GLFW_KEY_DOWN && action == GLFW_REPEAT)
+	{
+		x_offset = 0.0f;
+		y_offset = 1.0f;
+		cam_changed = true;
+	}
+
+	if (key == GLFW_KEY_R && action == GLFW_REPEAT)
+	{
+		cam_dist -= 0.5f;
+		cam_changed = true;
+	}
+
+	if (key == GLFW_KEY_F && action == GLFW_REPEAT)
+	{
+		cam_dist += 0.5f;
+		cam_changed = true;
+	}
+
+	if (cam_changed)
+	{
+		MoveAndOrientCamera (camera, glm::vec3 (0.0f, 0.0f, 0.0f), cam_dist, x_offset, y_offset);
+	}
+}
+
+void SizeCallback (GLFWwindow* window, int w, int h)
+{
+	glViewport (0, 0, w, h);
+}
 
 void DrawTreeObjects (unsigned int shader)
 {
@@ -80,8 +105,6 @@ void DrawTreeObjects (unsigned int shader)
 void DrawObjects (unsigned int shader)
 {
 	DrawTreeObjects (shader);
-
-	glBindVertexArray (VAOs[0]);
 
 	//floor
 	glm::mat4 floorModel = glm::mat4 (1.f);
@@ -123,7 +146,37 @@ void CreateObjects ()
 
 //Setup and quit functions
 #pragma region SETUPQUIT
+void Init ()
+{
+	glfwInit ();
 
+	window = glfwCreateWindow (WIDTH, HEIGHT, "Campfire Scene", NULL, NULL);
+	glfwMakeContextCurrent (window);
+	glfwSetKeyCallback (window, KeyCallback);
+	glfwSetWindowSizeCallback (window, SizeCallback);
+
+	gl3wInit ();
+
+	glEnable (GL_DEBUG_OUTPUT);
+	glDebugMessageCallback (DebugCallback, 0);
+
+	InitCamera (camera);
+	cam_dist = 5.f;
+	MoveAndOrientCamera (camera, glm::vec3 (0, 0, 0), cam_dist, 0.f, 0.f);
+
+	glEnable (GL_DEPTH_TEST);
+
+	shadow = setup_shadowmap (SH_MAP_WIDTH, SH_MAP_HEIGHT);
+
+	standardShader = CompileShader ("phong.vert", "phong.frag");
+	shadowShader = CompileShader ("shadow.vert", "shadow.frag");
+}
+
+void Deinit ()
+{
+	glfwDestroyWindow (window);
+	glfwTerminate ();
+}
 #pragma endregion
 
 //Functions for rendering
@@ -157,11 +210,11 @@ void RenderShadows (unsigned int renderShadowProgram, ShadowStruct shadow, glm::
 	glUniformMatrix4fv (glGetUniformLocation (renderShadowProgram, "projectedLightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr (projectedLightSpaceMatrix));
 	glUniform3f (glGetUniformLocation (renderShadowProgram, "lightDirection"), lightDirection.x, lightDirection.y, lightDirection.z);
 	glUniform3f (glGetUniformLocation (renderShadowProgram, "lightColour"), 1.0f, 1.0f, 1.0f);
-	glUniform3f (glGetUniformLocation (renderShadowProgram, "camPos"), Camera.Position.x, Camera.Position.y, Camera.Position.z);
+	glUniform3f (glGetUniformLocation (renderShadowProgram, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
 	glUniform3f (glGetUniformLocation (renderShadowProgram, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 	glm::mat4 view = glm::mat4 (1.f);
-	view = glm::lookAt (Camera.Position, Camera.Position + Camera.Front, Camera.Up);
+	view = glm::lookAt (camera.Position, camera.Position + camera.Front, camera.Up);
 	glUniformMatrix4fv (glGetUniformLocation (renderShadowProgram, "view"), 1, GL_FALSE, glm::value_ptr (view));
 
 	glm::mat4 projection = glm::mat4 (1.f);

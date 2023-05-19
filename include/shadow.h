@@ -8,13 +8,15 @@ struct ShadowStruct {
 
 };
 
-ShadowStruct setup_shadowmap (int w, int h) {
+inline ShadowStruct setup_shadowmap (int w, int h) {
 	ShadowStruct shadow;
 
 	glGenFramebuffers (1, &shadow.FBO);
 	glBindFramebuffer (GL_FRAMEBUFFER, shadow.FBO);
+
 	glGenTextures (1, &shadow.Texture);
 	glBindTexture (GL_TEXTURE_2D, shadow.Texture);
+	
 	glTexImage2D (GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, w, h, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -31,7 +33,7 @@ ShadowStruct setup_shadowmap (int w, int h) {
 	return shadow;
 }
 
-void saveShadowMapToBitmap (unsigned int Texture, int w, int h) {
+inline void saveShadowMapToBitmap (unsigned int Texture, int w, int h) {
 	float* pixelBuffer = (float*)malloc (sizeof (float) * w * h);// [] ;
 	glBindTexture (GL_TEXTURE_2D, Texture);
 	glGetTexImage (GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_FLOAT, pixelBuffer);

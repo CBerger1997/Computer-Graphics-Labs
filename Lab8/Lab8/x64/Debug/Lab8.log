@@ -1,23 +1,23 @@
 ﻿  Lab8.cpp
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(59,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(66,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(60,22): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(67,19): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\camera.h(61,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(68,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(43,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(44,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\bitmap.h(74): warning C4715: 'savebitmap': not all control paths return a value
-C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\include\bitmap.h(49): warning C4715: 'loadbitmap': not all control paths return a value
-  Lab8.vcxproj -> C:\Users\callu\Documents\GitHub\Computer-Graphics-Labs\Lab8\x64\Debug\Lab8.exe
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(46,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(47,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Lab8\Lab8\Lab8.cpp(113,2): error C2660: 'OrientCamera': function does not take 4 arguments
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(45,13): message : see declaration of 'OrientCamera'
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Lab8\Lab8\Lab8.cpp(113,2): message : while trying to match the argument list '(SCamera, float, double, double)'

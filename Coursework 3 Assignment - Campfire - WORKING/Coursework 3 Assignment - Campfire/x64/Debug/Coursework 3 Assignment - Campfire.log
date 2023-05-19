@@ -1,0 +1,102 @@
+﻿  gl3w.c
+  Campfire.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Campfire.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Campfire.cpp(65,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Campfire.cpp(86,20): warning C4018: '<': signed/unsigned mismatch
+  FireParticle.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\casteljau.h(58,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Grass.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Grass.cpp(115,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Log.cpp
+  Main.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(66,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(67,19): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(68,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(46,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(47,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Main.cpp(5,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Ground.cpp
+  GameObject.cpp
+  Moon.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Moon.cpp(90,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Moon.cpp(27,13): warning C4101: 'iterationColours': unreferenced local variable
+  Mushroom.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Mushroom.cpp(115,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Render.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(66,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(67,19): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(68,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(46,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(47,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\file.h(17,36): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(51,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(59,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(67,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(135,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(139,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(147,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(153,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(161,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(163,95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(171,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Render.cpp(173,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  River.cpp
+  Rocks.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Rocks.cpp(115,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Scene.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(66,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(67,19): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\camera.h(68,38): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(45,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(46,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\shadow.h(47,69): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Scene.cpp(101,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Scene.cpp(101,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Scene.cpp(149,14): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+  texture.cpp
+  Tree.cpp
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\Coursework 3 Assignment - Campfire\Tree.cpp(115,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Generating Code...
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\bitmap.h(46): warning C4715: 'loadbitmap': not all control paths return a value
+C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\include\bitmap.h(71): warning C4715: 'savebitmap': not all control paths return a value
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Coursework 3 Assignment - Campfire.vcxproj -> C:\Users\callu\OneDrive\Desktop\COMP3011\Computer-Graphics-Labs\Coursework 3 Assignment - Campfire - WORKING\x64\Debug\Coursework 3 Assignment - Campfire.exe

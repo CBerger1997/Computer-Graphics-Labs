@@ -11,21 +11,22 @@
 #include <sstream>
 #include <map>
 
-class GameObject {
+class GameObject
+{
 public:
-	explicit GameObject ();
-	explicit GameObject (const char*);
+	GameObject ();
 
 	~GameObject ();
 
-	void LoadObject (const char*, std::vector<glm::vec3>&, std::vector<glm::vec2>&, std::vector<glm::vec3>&);
-	void LoadMTL (const char*);
+	virtual void LoadObject (const char*, std::vector<glm::vec3>&, std::vector<glm::vec2>&, std::vector<glm::vec3>&) {};
+	virtual void LoadMTL (const char*) {};
+
 	void Draw (GLuint);
-	virtual void SetTransformations (glm::vec3, glm::vec3, float, glm::vec3) {};
-	virtual void ApplyTransformations () {};
-	virtual void Rotate (glm::vec3, float) {};
-	virtual void Move (glm::vec3) {};
-	virtual void Scale (glm::vec3) {};
+	void SetTransformations (glm::vec3, glm::vec3, float, glm::vec3);
+	void ApplyTransformations ();
+	void Rotate (glm::vec3, float);
+	void Move (glm::vec3);
+	void Scale (glm::vec3);
 
 protected:
 	//Model Parameters
@@ -37,15 +38,10 @@ protected:
 	glm::vec3 rotation;
 	float rotationDegrees;
 
-private:
-	//VAO and VBO Parameters
+	//VAO / VBO Parameters
 	GLuint VAO;
 	GLuint VBO[3];
 
 	//Vertex Data Parameters
 	unsigned int numVertices;
-
-	//Material Parameters
-	bool isUsingMtl;
-	std::map<std::string, glm::vec3> mtl;
 };

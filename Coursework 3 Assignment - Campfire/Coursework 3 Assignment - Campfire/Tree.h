@@ -1,17 +1,14 @@
-#ifndef TREE_H
-#define TREE_H
+#pragma once
 
 #include "GameObject.h"
 
 class Tree : public GameObject {
 public:
-	void SetTransformations (glm::vec3, glm::vec3, float, glm::vec3);
-	void ApplyTransformations ();
-	void Rotate (glm::vec3, float);
-	void Move (glm::vec3);
-	void Scale (glm::vec3);
-private:
-	using GameObject::GameObject;
-};
+	Tree (const char*);
+	
+	void LoadObject (const char*, std::vector<glm::vec3>&, std::vector<glm::vec2>&, std::vector<glm::vec3>&);
+	void LoadMTL (const char*);
 
-#endif // !TREE_H
+private:
+	std::map<std::string, glm::vec3> mtl;
+};
